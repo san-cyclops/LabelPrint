@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A978C73C-3789-4AD1-8790-A59664094276}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ERP.UI.Windows</RootNamespace>
+    <AssemblyName>LabelPrint</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>gol1_ugk_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ERP.UI.Windows.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\packages\EntityFramework.Extended.6.0.0.86\lib\net45\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GlassButton">
+      <HintPath>..\ERP.Utility\References\GlassButton.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomControls\PaladinTheme.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxCurrencyMinusAllowed.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxCurrencyMinusAllowed.Designer.cs">
+      <DependentUpon>TextBoxCurrencyMinusAllowed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBasePrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBasePrintForm.designer.cs">
+      <DependentUpon>FrmBasePrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\A1Panel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\A1Panel.Designer.cs" />
+    <Compile Include="CustomControls\A1PanelGraphics.cs" />
+    <Compile Include="CustomControls\AGauge.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\AGauge.designer.cs">
+      <DependentUpon>AGauge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\DigitalDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\DigitalDisplayControl.designer.cs" />
+    <Compile Include="CustomControls\Globals.cs" />
+    <Compile Include="CustomControls\ProgressDisk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ProgressDisk.Designer.cs" />
+    <Compile Include="CustomControls\ProgressIndicator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ProgressIndicator.Designer.cs" />
+    <Compile Include="CustomControls\RotationType.cs" />
+    <Compile Include="CustomControls\TextBoxCurrency.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxCurrency.Designer.cs">
+      <DependentUpon>TextBoxCurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxInteger.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxInteger.Designer.cs">
+      <DependentUpon>TextBoxInteger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxMasterCode.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxMasterCode.Designer.cs">
+      <DependentUpon>TextBoxMasterCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxMasterDescription.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxMasterDescription.Designer.cs">
+      <DependentUpon>TextBoxMasterDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxNumeric.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxNumeric.Designer.cs">
+      <DependentUpon>TextBoxNumeric.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxPercentGen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxPercentGen.Designer.cs">
+      <DependentUpon>TextBoxPercentGen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxPercentGrt100.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxPercentGrt100.Designer.cs">
+      <DependentUpon>TextBoxPercentGrt100.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxProductCode.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxProductCode.Designer.cs">
+      <DependentUpon>TextBoxProductCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxQty.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\TextBoxQty.Designer.cs">
+      <DependentUpon>TextBoxQty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TextDisplayModes.cs" />
+    <Compile Include="CustomControls\uc_GButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\uc_GButton.designer.cs">
+      <DependentUpon>uc_GButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBarcode.Designer.cs">
+      <DependentUpon>FrmBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBaseMasterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBaseMasterForm.Designer.cs">
+      <DependentUpon>FrmBaseMasterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBaseTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBaseTransactionForm.Designer.cs">
+      <DependentUpon>FrmBaseTransactionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmBasePrintForm.resx">
+      <DependentUpon>FrmBasePrintForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="CustomControls\uc_GButton.resx">
+      <DependentUpon>uc_GButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBarcode.resx">
+      <DependentUpon>FrmBarcode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBaseMasterForm.resx">
+      <DependentUpon>FrmBaseMasterForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBaseTransactionForm.resx">
+      <DependentUpon>FrmBaseTransactionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\2X1 Sticker.lbx" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\3Sticker.lbx" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\GlitzTAG A4 new.lbx" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\NolimitTAG A4 new.lbx" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\Price Removable TAG.lbx" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\schema.ini" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\Zebra 110 2X1 Sticker.lbx" />
+    <None Include="TagFiles\ReferenceProductID_1\Barcode\Zebra 4 Cross TAG.lbx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Default Customer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Default Salesman.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barcode-icon.png" />
+    <None Include="Resources\kword.png" />
+    <None Include="Resources\box-background.jpg" />
+    <None Include="Resources\cusgroup.png" />
+    <None Include="Resources\kmenuedit.png" />
+    <None Include="Resources\unlock.png" />
+    <None Include="Resources\PriceChange.png" />
+    <None Include="Resources\kdevelop.png" />
+    <None Include="Resources\Mag.ico" />
+    <None Include="Resources\kuser.png" />
+    <None Include="Resources\ktouch.png" />
+    <None Include="Resources\kenolaba.png" />
+    <None Include="Resources\doctor.jpg" />
+    <None Include="Resources\doctor1.jpg" />
+    <None Include="Resources\Doc.png" />
+    <None Include="Resources\Doc1.png" />
+    <None Include="Resources\Doc copy.png" />
+    <None Include="Resources\edit_group1.png" />
+    <None Include="Resources\creditcards.png" />
+    <None Include="Resources\kedit.png" />
+    <None Include="Resources\money.png" />
+    <None Include="Resources\kjots.png" />
+    <None Include="Resources\playlist.png" />
+    <None Include="Resources\os.png" />
+    <None Include="Resources\Payment.png" />
+    <None Include="Resources\check_book.png" />
+    <None Include="Resources\ChequePrint.png" />
+    <None Include="Resources\bill_of_document.png" />
+    <None Include="Resources\invoice_document_bill.png" />
+    <None Include="Resources\Imagecapture1.png" />
+    <None Include="Resources\Browse.png" />
+    <None Include="Resources\Default_Image.png" />
+    <None Include="Resources\capture3231.png" />
+    <None Include="Resources\browse_1.png" />
+    <None Include="Resources\capture32311.png" />
+    <None Include="Resources\browse_11.png" />
+    <None Include="Resources\clear-icon.png" />
+    <None Include="Resources\PostIcon.png" />
+    <None Include="Resources\PostIcon1.png" />
+    <None Include="Resources\pause.png" />
+    <None Include="Resources\pausebutt.png" />
+    <None Include="Resources\playbutton.png" />
+    <None Include="Resources\apply.png" />
+    <None Include="Resources\cap.png" />
+    <None Include="Resources\cap2.png" />
+    <None Include="Resources\Brose.png" />
+    <None Include="Resources\BrowseImage.png" />
+    <None Include="Resources\capture.png" />
+    <None Include="Resources\capturecam.png" />
+    <None Include="Resources\download.png" />
+    <None Include="Resources\Home-icon.png" />
+    <None Include="Resources\ksirtet1.png" />
+    <None Include="Resources\DownloadDatabase.png" />
+    <None Include="Resources\login_icon.png" />
+    <None Include="Resources\login_User_ico.PNG" />
+    <None Include="Resources\New_Icons\ok-icon.png" />
+    <None Include="Resources\New_Icons\Button-Close-icon.png" />
+    <None Include="Resources\New_Icons\clear.png" />
+    <None Include="Resources\New_Icons\save-icon.png" />
+    <None Include="Resources\New_Icons\delete-contact-folded-icon.png" />
+    <None Include="Resources\New_Icons\printer.png" />
+    <None Include="Resources\New_Icons\Monitor-icon.png" />
+    <None Include="Resources\New_Icons\Button-Help-icon.png" />
+    <None Include="Resources\Actions-window-close-icon.png" />
+    <None Include="Resources\minimize-icon.png" />
+    <None Include="Resources\Help_.png" />
+    <None Include="Resources\Menu-icon.png" />
+    <None Include="Resources\32by32Icons\Close-icon32.png" />
+    <None Include="Resources\32by32Icons\clear-icon32.png" />
+    <None Include="Resources\32by32Icons\save-icon32.png" />
+    <None Include="Resources\32by32Icons\delete-contact32.png" />
+    <None Include="Resources\32by32Icons\printer32.png" />
+    <None Include="Resources\32by32Icons\computer-icon.png" />
+    <None Include="Resources\32by32Icons\zoom-search-2-icon.png" />
+    <None Include="Resources\32by32Icons\Help-icon32.png" />
+    <None Include="Resources\32by32Icons\Button-Pause-icon.png" />
+    <None Include="Resources\Login-icon.png" />
+    <None Include="Resources\Keys-icon.png" />
+    <None Include="Resources\help-icon24.png" />
+    <None Include="Resources\key-icon24.png" />
+    <None Include="Resources\32by32Icons\help-about-icon32.png" />
+    <None Include="Resources\32by32Icons\home-icon %283%29.png" />
+    <None Include="Resources\32by32Icons\Group-icon.png" />
+    <None Include="Resources\32by32Icons\App-Group-cobfig-icon.png" />
+    <None Include="Resources\32by32Icons\network-icon %281%29.png" />
+    <None Include="Resources\32by32Icons\Downloads-1-icon.png" />
+    <None Include="Resources\32by32Icons\User-group-icon32.png" />
+    <None Include="Resources\32by32Icons\Open-Sign-icon.png" />
+    <None Include="Resources\32by32Icons\Man-1-icon.png" />
+    <None Include="Resources\32by32Icons\Man-16-icon.png" />
+    <None Include="Resources\32by32Icons\Status-user-online-icon.png" />
+    <None Include="Resources\32by32Icons\Status-user-invisible-icon.png" />
+    <None Include="Resources\32by32Icons\Status-user-offline-icon.png" />
+    <None Include="Resources\32by32Icons\loading-icon.png" />
+    <None Include="Resources\32by32Icons\Man-14-icon.png" />
+    <None Include="Resources\32by32Icons\Sketchup-icon.png" />
+    <None Include="Resources\32by32Icons\Skala-icon.png" />
+    <None Include="Resources\32by32Icons\Spotify-icon.png" />
+    <None Include="Resources\32by32Icons\Media-spotify-icon.png" />
+    <None Include="Resources\32by32Icons\arrow-next-icon.png" />
+    <None Include="Resources\32by32Icons\Buzzfeed-3-icon.png" />
+    <None Include="Resources\32by32Icons\name-card-icon.png" />
+    <None Include="Resources\32by32Icons\copyleft-icon.png" />
+    <None Include="Resources\32by32Icons\Open-Arena-2-icon.png" />
+    <None Include="Resources\32by32Icons\note-icon.png" />
+    <None Include="Resources\32by32Icons\barcode-folded-icon.png" />
+    <None Include="Resources\32by32Icons\Letter-Q-icon.png" />
+    <None Include="Resources\32by32Icons\man-1-icon %281%29.png" />
+    <None Include="Resources\32by32Icons\users-1-icon.png" />
+    <None Include="Resources\32by32Icons\keyboard-icon.png" />
+    <None Include="Resources\32by32Icons\configuration-1-icon.png" />
+    <None Include="Resources\32by32Icons\Keynote-icon.png" />
+    <None Include="Resources\32by32Icons\MusicBrainz-icon.png" />
+    <None Include="Resources\32by32Icons\WJoy-icon.png" />
+    <None Include="Resources\32by32Icons\iBooks-icon.png" />
+    <None Include="Resources\32by32Icons\Man-9-icon.png" />
+    <None Include="Resources\32by32Icons\Folder-Open-icon.png" />
+    <None Include="Resources\32by32Icons\referee-cards-icon.png" />
+    <None Include="Resources\32by32Icons\Card_Desktop-icon.png" />
+    <None Include="Resources\32by32Icons\Cute-Ball-Logoff-icon.png" />
+    <None Include="Resources\32by32Icons\Aperture-icon.png" />
+    <None Include="Resources\32by32Icons\Lost-The-Video-Game-1-icon.png" />
+    <None Include="Resources\32by32Icons\Feedback-Assistant-icon.png" />
+    <None Include="Resources\32by32Icons\Online-Shopping-icon.png" />
+    <None Include="Resources\32by32Icons\UnRarX-icon.png" />
+    <None Include="Resources\32by32Icons\Create-ticket-icon.png" />
+    <None Include="Resources\32by32Icons\Group-icon32.png" />
+    <None Include="Resources\32by32Icons\Man-icon32.png" />
+    <None Include="Resources\32by32Icons\1Password-icon.png" />
+    <None Include="Resources\32by32Icons\Setting-icon.png" />
+    <None Include="Resources\32by32Icons\settings-icon.png" />
+    <Content Include="ERP_Logo_2.ico" />
+    <None Include="Resources\employee-icon.png" />
+    <None Include="Resources\ERP_Logo_2.ico" />
+    <None Include="Resources\Login\login.png" />
+    <None Include="Resources\Login\loginscreen.jpg" />
+    <None Include="Resources\Login\loginNew.jpg" />
+    <None Include="Resources\Login\bg.jpg" />
+    <None Include="Resources\Login\SplashScreen.jpg" />
+    <None Include="Resources\32by32Icons\Previous-icon.png" />
+    <Content Include="ERP_Logo_3.ico" />
+    <None Include="Resources\default_product_1.png" />
+    <None Include="Resources\32by32Icons\Nik-Folder-icon.png" />
+    <None Include="Resources\32by32Icons\Duet-icon.png" />
+    <None Include="Resources\abcccccaaa.png" />
+    <None Include="Resources\abcccccaaa-removebg-preview.png" />
+    <Content Include="gol1_22o_icon.ico" />
+    <Content Include="gol1_djY_icon.ico" />
+    <Content Include="gol1_fI3_icon.ico" />
+    <Content Include="gol1_ugk_icon.ico" />
+    <Content Include="Resources\pre-loader.gif" />
+    <None Include="Resources\Room.jpg" />
+    <None Include="Resources\Room1.jpg" />
+    <None Include="Resources\re.png" />
+    <None Include="Resources\res.png" />
+    <None Include="Resources\suppgroup1.png" />
+    <None Include="Resources\Zoom.png" />
+    <None Include="Resources\System-preferences-64.png" />
+    <None Include="Resources\stopbutton.png" />
+    <None Include="Resources\remo.png" />
+    <None Include="Resources\Upload-Database.ico" />
+    <None Include="Resources\upload.png" />
+    <None Include="Resources\Product.png" />
+    <None Include="Resources\process.png" />
+    <None Include="Resources\proces.png" />
+    <None Include="Resources\SPASH.gif" />
+    <None Include="Resources\stock-market-icon.png" />
+    <None Include="Resources\quitexit-icon.png" />
+    <None Include="Resources\User-blue-icon.png" />
+    <None Include="Resources\User-icon.png" />
+    <None Include="Resources\Scale.jpg" />
+    <None Include="Resources\Screenshot_9-removebg-preview.png" />
+    <Content Include="Resources\xchat.png" />
+    <None Include="Resources\ZoomIn.png" />
+    <None Include="Resources\ZoomIn1.png" />
+    <None Include="Resources\ZoomIn2.png" />
+    <Content Include="TagFiles\ReferenceProductID_1\Barcode\Barcode.exe" />
+    <None Include="Resources\close.jpg" />
+    <None Include="Resources\1384173133_132192.ico" />
+    <Content Include="Resources\Default Collector1.jpg" />
+    <Content Include="Resources\Default Collector2.jpg" />
+    <None Include="Resources\images.jpg" />
+    <None Include="Resources\package.png" />
+    <None Include="Resources\Default Document.jpg" />
+    <Content Include="Resources\Default Driver.jpg" />
+    <Content Include="Resources\Default Helper.jpg" />
+    <Content Include="Resources\Default Loyalty Customer.jpg" />
+    <Content Include="Resources\Default Product.jpg" />
+    <Content Include="Resources\Default Supplier.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ERP.Domain\Domain.csproj">
+      <Project>{6f02b2c1-4fce-4427-b949-daee3527cab1}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERP.Notification\Notification.csproj">
+      <Project>{605006eb-d4e6-4312-a293-3a43fac43240}</Project>
+      <Name>Notification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERP.Service\Service.csproj">
+      <Project>{d5350ce9-e1a3-4c9f-a82e-7d837e1c9d0b}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERP.Utility\Utility.csproj">
+      <Project>{63ad686e-3477-49a6-b4b3-0cd7f1c0726e}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
