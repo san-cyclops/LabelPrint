@@ -31,7 +31,7 @@ namespace ERP.Service
 
             if(invBarcodeDetailTempList != null)
             {
-                invBarcodeDetailTemp = invBarcodeDetailTempList.Where(p => p.ProductCode == invBarcodeDetail.ProductCode && p.BatchNo == invBarcodeDetail.BatchNo).FirstOrDefault();
+                invBarcodeDetailTemp = invBarcodeDetailTempList.Where(p => p.ProductCode == invBarcodeDetail.ProductCode && p.UnitOfMeasure == invBarcodeDetail.UnitOfMeasure && p.BatchNo == invBarcodeDetail.BatchNo).FirstOrDefault();
             }
 
              
@@ -47,6 +47,7 @@ namespace ERP.Service
             {
                 invBarcodeDetailTempList.Remove(invBarcodeDetailTemp);
                 invBarcodeDetail.LineNo = invBarcodeDetailTemp.LineNo;
+                invBarcodeDetail.Qty = invBarcodeDetailTemp.Qty + invBarcodeDetail.Qty; 
                 invBarcodeDetailTemp = invBarcodeDetail;
             }
             if (invBarcodeDetailTempList == null)
