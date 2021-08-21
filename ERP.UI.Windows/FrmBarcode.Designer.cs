@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItemDetails = new System.Windows.Forms.DataGridView();
             this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -176,9 +176,9 @@
             // ManufDate
             // 
             this.ManufDate.DataPropertyName = "ManufDate";
-            dataGridViewCellStyle6.Format = "d";
-            dataGridViewCellStyle6.NullValue = null;
-            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.ManufDate.HeaderText = "Manuf Date";
             this.ManufDate.Name = "ManufDate";
             this.ManufDate.Width = 110;
@@ -186,9 +186,9 @@
             // Expiry
             // 
             this.Expiry.DataPropertyName = "ExpiryDate";
-            dataGridViewCellStyle7.Format = "d";
-            dataGridViewCellStyle7.NullValue = null;
-            this.Expiry.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Expiry.DefaultCellStyle = dataGridViewCellStyle2;
             this.Expiry.HeaderText = "Expiry Date";
             this.Expiry.Name = "Expiry";
             this.Expiry.Width = 110;
@@ -205,8 +205,8 @@
             // Qty
             // 
             this.Qty.DataPropertyName = "Qty";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle3;
             this.Qty.HeaderText = "Qty";
             this.Qty.Name = "Qty";
             this.Qty.ReadOnly = true;
@@ -215,8 +215,8 @@
             // SellingPrice
             // 
             this.SellingPrice.DataPropertyName = "SellingPrice";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle4;
             this.SellingPrice.HeaderText = "Selling Price";
             this.SellingPrice.Name = "SellingPrice";
             this.SellingPrice.ReadOnly = true;
@@ -224,8 +224,8 @@
             // WholesalePrice
             // 
             this.WholesalePrice.DataPropertyName = "WholesalePrice";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.WholesalePrice.HeaderText = "Wholesale Price";
             this.WholesalePrice.Name = "WholesalePrice";
             this.WholesalePrice.ReadOnly = true;
@@ -352,9 +352,9 @@
             this.chkOverWrite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOverWrite.Location = new System.Drawing.Point(870, 36);
             this.chkOverWrite.Name = "chkOverWrite";
-            this.chkOverWrite.Size = new System.Drawing.Size(93, 20);
+            this.chkOverWrite.Size = new System.Drawing.Size(122, 20);
             this.chkOverWrite.TabIndex = 88;
-            this.chkOverWrite.Text = "Overwrite ";
+            this.chkOverWrite.Text = "Qty Overwrite ";
             this.chkOverWrite.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.chkOverWrite.UseVisualStyleBackColor = true;
             // 

@@ -511,7 +511,7 @@ namespace ERP.UI.Windows
                 List<InvBarcodeDetailTemp> invBarcodeDetailTemps = invBarcodeService.GetDocument(cmbDocNo.Text.Trim());
                 string NewDocumentNo;
 
-                if (invBarcodeDetailTemps.Count>0)
+                if (invBarcodeDetailTemps !=null)
                 {
                     bool deleteDocument = invBarcodeService.Delete(cmbDocNo.Text.Trim());
                     if (deleteDocument == false)
@@ -526,7 +526,7 @@ namespace ERP.UI.Windows
                     NewDocumentNo = invBarcodeService.GetDocumentNo();
                 }
 
-                bool saveDocument = invBarcodeService.Save(invBarcodeDetailTempList, NewDocumentNo, this.Name);
+                bool saveDocument = invBarcodeService.Save(invBarcodeDetailTempList, NewDocumentNo, txtReferenceDocumentNo.Text.Trim());
 
                 if (saveDocument)
                 {

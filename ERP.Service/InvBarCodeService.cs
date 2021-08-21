@@ -193,18 +193,21 @@ namespace ERP.Service
                 List<InvBarcodeDetailTemp> invBarcodeDetailTemps = new List<InvBarcodeDetailTemp>();
                 using (OleDbConnection con = new OleDbConnection(str))
                 {
-                    string command = @"SELECT DocumentNo, DocumentDate, LineNo, ProductCode, ProductName, BarCode,BatchNo, ExpiryDate, ManufDate, Qty, WholesalePrice, SellingPrice, UnitOfMeasure
+                    string command = @"SELECT DocumentNo, DocumentDate, LineNo, ProductCode, ProductName, BarCode,BatchNo, ExpiryDate, ManufDate, Qty, WholesalePrice, SellingPrice, UnitOfMeasure,Reference
                                     FROM InvBarcode where documentno = '" + DocNo + "'ORDER BY LineNo asc";
                     OleDbCommand cmdd = new OleDbCommand(command, con);
                     OleDbDataReader dr;
                     con.Open();
                     dr = cmdd.ExecuteReader();
 
+                    bool validate = false;
+
                     CultureInfo provider = CultureInfo.InvariantCulture;
 
                     InvBarcodeDetailTemp invBarcodeDetailTemp = new InvBarcodeDetailTemp();
                     while (dr.Read())
                     {
+                        validate = true;
                         invBarcodeDetailTemp = new InvBarcodeDetailTemp();
                         invBarcodeDetailTemp.DocumentNo = dr["DocumentNo"].ToString();
                         //    invBarcodeDetailTemp.DocumentDate = DateTime.ParseExact(dr["DocumentDate"].ToString(), "mm/dd/yyyy", provider);
@@ -219,9 +222,15 @@ namespace ERP.Service
                         invBarcodeDetailTemp.WholesalePrice = Convert.ToDecimal(dr["WholesalePrice"].ToString());
                         invBarcodeDetailTemp.SellingPrice = Convert.ToDecimal(dr["SellingPrice"].ToString());
                         invBarcodeDetailTemp.UnitOfMeasure = dr["UnitOfMeasure"].ToString();
+                        invBarcodeDetailTemp.Reference = dr["Reference"].ToString();
+                        
                         invBarcodeDetailTemps.Add(invBarcodeDetailTemp);
                     }
                     con.Close();
+                    if(validate==false)
+                    {
+                        invBarcodeDetailTemps = null;
+                    }
                     return invBarcodeDetailTemps;
                 }
             }
@@ -241,7 +250,7 @@ namespace ERP.Service
             return invBarcodeDetailTemp;
         }
 
-        public bool Save(List<InvBarcodeDetailTemp> invBarcodeDetailTemp, string newDocumentNo, string formName = "")
+        public bool Save(List<InvBarcodeDetailTemp> invBarcodeDetailTemp, string newDocumentNo, string Reference)
         {
             {
 
@@ -251,6 +260,7 @@ namespace ERP.Service
                 string DocumentNo = newDocumentNo;
 
                 invBarcodeDetailTemp.ForEach(se => se.DocumentNo = DocumentNo);
+                invBarcodeDetailTemp.ForEach(se => se.Reference = Reference);
 
                 var invBarcodeDetailSaveQuery = (from pd in invBarcodeDetailTemp select pd).ToList();
 
@@ -264,7 +274,7 @@ namespace ERP.Service
                 {
                     foreach (var obj in invBarcodeDetailTemp)
                     {
-                        string command = "insert into InvBarcode(InvBarcodeID,DocumentNo, DocumentDate, LineNo, ProductCode, ProductName, ExpiryDate, ManufDate, BatchNo, Qty, WholesalePrice, SellingPrice, UnitOfMeasure) values(0,'" + obj.DocumentNo + "','" + obj.DocumentDate + "','" + obj.LineNo + "','" + obj.ProductCode + "','" + obj.ProductName + "','" + obj.ExpiryDate + "','" + obj.ManufDate + "','" + obj.BatchNo + "','" + obj.Qty + "','" + obj.WholesalePrice + "','" + obj.SellingPrice + "','" + obj.UnitOfMeasure + "') ";
+                        string command = "insert into InvBarcode(InvBarcodeID,DocumentNo, DocumentDate, LineNo, ProductCode, ProductName, ExpiryDate, ManufDate, BatchNo, Qty, WholesalePrice, SellingPrice, UnitOfMeasure,Reference) values(0,'" + obj.DocumentNo + "','" + obj.DocumentDate + "','" + obj.LineNo + "','" + obj.ProductCode + "','" + obj.ProductName + "','" + obj.ExpiryDate + "','" + obj.ManufDate + "','" + obj.BatchNo + "','" + obj.Qty + "','" + obj.WholesalePrice + "','" + obj.SellingPrice + "','" + obj.UnitOfMeasure + "','" + obj.Reference + "') ";
                         OleDbCommand cmdd = new OleDbCommand(command, con);
                         con.Open();
                         cmdd.ExecuteNonQuery();

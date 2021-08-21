@@ -93,5 +93,7 @@ namespace ERP.Domain
         public string UnitOfMeasureName { get; set; }
 
         public bool IsBatch { get; set; }
+
+        public string Reference { get; set; }
     }
 }
