@@ -2,19 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ERP.Domain;
 using System.Data;
 using ERP.Utility;
-using EntityFramework.Extensions;
-using System.Transactions;
-using System.Data.Entity.Core.Objects;
-using System.Data.Common;
-using System.Data.Entity.ModelConfiguration;
-using System.Data.SqlClient;
-using System.Data.Entity;
-using MoreLinq;
 using System.Data.OleDb;
+using System.Globalization;
 
 namespace ERP.Service
 {
@@ -76,12 +68,180 @@ namespace ERP.Service
             return invBarcodeDetailTempList.OrderBy(pd => pd.LineNo).ToList();
         }
 
-        public bool Save(List<InvBarcodeDetailTemp> invBarcodeDetailTemp, out string newDocumentNo, string formName = "")
+
+        public string[] GetLabel()
+        {
+            using (OleDbConnection con = new OleDbConnection(str))
+            {
+                string statement = "SELECT COUNT(*) FROM [LableConfig]";
+                OleDbCommand cmd = new OleDbCommand(statement, con);
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                con.Close();
+
+                string command = "Select lablename from LableConfig";
+                OleDbCommand cmdd = new OleDbCommand(command, con);
+                OleDbDataReader dr;
+                con.Open();
+                //cmdd.ExecuteNonQuery();
+                dr = cmdd.ExecuteReader();
+                
+                int x=0;
+                string[] strList = new string[count];
+
+                while (dr.Read())
+                {
+                    strList[x] = dr["lablename"].ToString();
+                    x++; 
+                } 
+                con.Close();
+                return strList;
+            }
+        }
+
+        public string[] GetUnitOfMeasure()
+        {
+            using (OleDbConnection con = new OleDbConnection(str))
+            {
+                string statement = "SELECT COUNT(*) FROM [InvUnit]";
+                OleDbCommand cmd = new OleDbCommand(statement, con);
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                con.Close();
+
+                string command = "Select UnitOfMeasure from InvUnit";
+                OleDbCommand cmdd = new OleDbCommand(command, con);
+                OleDbDataReader dr;
+                con.Open();
+                //cmdd.ExecuteNonQuery();
+                dr = cmdd.ExecuteReader();
+
+                int x = 0;
+                string[] strList = new string[count];
+
+                while (dr.Read())
+                {
+                    strList[x] = dr["UnitOfMeasure"].ToString();
+                    x++;
+                }
+                con.Close();
+                return strList;
+            }
+        }
+
+        public string GetDocumentNo()
+        {
+            using (OleDbConnection con = new OleDbConnection(str))
+            {
+                string statement = "SELECT DocumentNo FROM [InvBarCodeConfig]";
+                OleDbCommand cmd = new OleDbCommand(statement, con);
+                con.Open();
+                int count = (int)cmd.ExecuteScalar()+1;
+                con.Close();
+                string getNewCode = "LBL" + new StringBuilder().Insert(0, "0", 6 - (count.ToString().Length)) + count.ToString();
+                return getNewCode;
+            }
+        }
+
+        public void updateDocumentNo(string documentNo)
+        {
+            int x = Convert.ToInt32(documentNo.Substring(3, 6));
+            using (OleDbConnection con = new OleDbConnection(str))
+            {
+                string command = "update InvBarCodeConfig set DocumentNo = " + x ;
+                OleDbCommand cmdd = new OleDbCommand(command, con);
+                con.Open();
+                cmdd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+        public string[] GetDocumentNos()
+        {
+            using (OleDbConnection con = new OleDbConnection(str))
+            {
+                string statement = "SELECT Count(*) AS N FROM (SELECT DISTINCT DocumentNo FROM InvBarcode) AS T"; 
+                OleDbCommand cmd = new OleDbCommand(statement, con);
+                con.Open();
+                int count = (int)cmd.ExecuteScalar();
+                con.Close();
+
+                string command = "SELECT DocumentNo FROM InvBarcode GROUP BY DocumentNo ORDER BY DocumentNo desc";
+                OleDbCommand cmdd = new OleDbCommand(command, con);
+                OleDbDataReader dr;
+                con.Open();
+                //cmdd.ExecuteNonQuery();
+                dr = cmdd.ExecuteReader();
+
+                int x = 0;
+                string[] strList = new string[count];   
+
+                while (dr.Read())
+                {
+                    strList[x] = dr["DocumentNo"].ToString();
+                    x++;
+                }
+                con.Close();
+                return strList;
+            }
+        }
+
+        public List<InvBarcodeDetailTemp> GetDocument(string DocNo)
+        {
+            try
+            {
+                List<InvBarcodeDetailTemp> invBarcodeDetailTemps = new List<InvBarcodeDetailTemp>();
+                using (OleDbConnection con = new OleDbConnection(str))
+                {
+                    string command = @"SELECT DocumentNo, DocumentDate, LineNo, ProductCode, ProductName, BarCode,BatchNo, ExpiryDate, ManufDate, Qty, WholesalePrice, SellingPrice, UnitOfMeasure
+                                    FROM InvBarcode where documentno = '" + DocNo + "'ORDER BY LineNo asc";
+                    OleDbCommand cmdd = new OleDbCommand(command, con);
+                    OleDbDataReader dr;
+                    con.Open();
+                    dr = cmdd.ExecuteReader();
+
+                    CultureInfo provider = CultureInfo.InvariantCulture;
+
+                    InvBarcodeDetailTemp invBarcodeDetailTemp = new InvBarcodeDetailTemp();
+                    while (dr.Read())
+                    {
+                        invBarcodeDetailTemp = new InvBarcodeDetailTemp();
+                        invBarcodeDetailTemp.DocumentNo = dr["DocumentNo"].ToString();
+                        //    invBarcodeDetailTemp.DocumentDate = DateTime.ParseExact(dr["DocumentDate"].ToString(), "mm/dd/yyyy", provider);
+                        invBarcodeDetailTemp.LineNo = Convert.ToInt64(dr["LineNo"].ToString());
+                        invBarcodeDetailTemp.ProductCode = dr["ProductCode"].ToString();
+                        invBarcodeDetailTemp.ProductName = dr["ProductName"].ToString();
+                        invBarcodeDetailTemp.BarCode = dr["BarCode"].ToString();
+                        invBarcodeDetailTemp.BatchNo = dr["BatchNo"].ToString();
+                        invBarcodeDetailTemp.ExpiryDate = DateTime.Parse(dr["ExpiryDate"].ToString());
+                        invBarcodeDetailTemp.ManufDate = DateTime.Parse(dr["ManufDate"].ToString());
+                        invBarcodeDetailTemp.Qty = Convert.ToDecimal(dr["Qty"]);
+                        invBarcodeDetailTemp.WholesalePrice = Convert.ToDecimal(dr["WholesalePrice"].ToString());
+                        invBarcodeDetailTemp.SellingPrice = Convert.ToDecimal(dr["SellingPrice"].ToString());
+                        invBarcodeDetailTemp.UnitOfMeasure = dr["UnitOfMeasure"].ToString();
+                        invBarcodeDetailTemps.Add(invBarcodeDetailTemp);
+                    }
+                    con.Close();
+                    return invBarcodeDetailTemps;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+           
+        }
+
+        public bool Save(List<InvBarcodeDetailTemp> invBarcodeDetailTemp, string newDocumentNo, string formName = "")
         {
             
             {
+                //newDocumentNo = "001";
 
-                newDocumentNo = "001";
+                updateDocumentNo(newDocumentNo);
+
+
                 string DocumentNo = newDocumentNo;
 
                 invBarcodeDetailTemp.ForEach(se => se.DocumentNo = DocumentNo);
@@ -91,6 +251,8 @@ namespace ERP.Service
                 //string mergeSql = CommonService.MergeSqlToForTrans(invBarcodeDetailSaveQuery.ToDataTable(), "invBarcode");
                 //CommonService.BulkInsert(invBarcodeDetailSaveQuery.ToDataTable(), "invBarcode", mergeSql);
                 //context.SaveChanges();
+
+
 
                 using (OleDbConnection con = new OleDbConnection(str))
                 { 

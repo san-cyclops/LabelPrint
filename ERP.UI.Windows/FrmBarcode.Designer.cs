@@ -28,12 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItemDetails = new System.Windows.Forms.DataGridView();
+            this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Expiry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WholesalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblDate = new System.Windows.Forms.Label();
             this.dtpReferenceDocumentDate = new System.Windows.Forms.DateTimePicker();
             this.cmbUnit = new System.Windows.Forms.ComboBox();
@@ -44,6 +55,8 @@
             this.lblTag = new System.Windows.Forms.Label();
             this.cmbTag = new System.Windows.Forms.ComboBox();
             this.grpHeader = new System.Windows.Forms.Panel();
+            this.cmbDocNo = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtReferenceDocumentNo = new System.Windows.Forms.TextBox();
             this.lblPDocumentNo = new System.Windows.Forms.Label();
             this.txtSellingPrice = new ERP.UI.Windows.CustomControls.TextBoxQty();
@@ -57,17 +70,7 @@
             this.lblNetAmount = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Expiry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WholesalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLoad = new MaterialSkin.Controls.MaterialFlatButton();
             this.grpButtonSet2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemDetails)).BeginInit();
@@ -130,10 +133,106 @@
             this.dgvItemDetails.DoubleClick += new System.EventHandler(this.dgvItemDetails_DoubleClick);
             this.dgvItemDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvItemDetails_KeyDown);
             // 
+            // LineNo
+            // 
+            this.LineNo.DataPropertyName = "LineNo";
+            this.LineNo.HeaderText = "Row";
+            this.LineNo.Name = "LineNo";
+            this.LineNo.ReadOnly = true;
+            this.LineNo.Width = 35;
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.DataPropertyName = "ProductCode";
+            this.ProductCode.HeaderText = "Product Code";
+            this.ProductCode.Name = "ProductCode";
+            this.ProductCode.ReadOnly = true;
+            this.ProductCode.Width = 133;
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "Product Name";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            this.ProductName.Width = 245;
+            // 
+            // Unit
+            // 
+            this.Unit.DataPropertyName = "UnitOfMeasure";
+            this.Unit.HeaderText = "Unit";
+            this.Unit.Name = "Unit";
+            this.Unit.Width = 65;
+            // 
+            // BatchNo
+            // 
+            this.BatchNo.DataPropertyName = "BatchNo";
+            this.BatchNo.HeaderText = "Batch No";
+            this.BatchNo.Name = "BatchNo";
+            this.BatchNo.ReadOnly = true;
+            this.BatchNo.Width = 140;
+            // 
+            // ManufDate
+            // 
+            this.ManufDate.DataPropertyName = "ManufDate";
+            dataGridViewCellStyle11.Format = "d";
+            dataGridViewCellStyle11.NullValue = null;
+            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle11;
+            this.ManufDate.HeaderText = "Manuf Date";
+            this.ManufDate.Name = "ManufDate";
+            this.ManufDate.Width = 110;
+            // 
+            // Expiry
+            // 
+            this.Expiry.DataPropertyName = "ExpiryDate";
+            dataGridViewCellStyle12.Format = "d";
+            dataGridViewCellStyle12.NullValue = null;
+            this.Expiry.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Expiry.HeaderText = "Expiry Date";
+            this.Expiry.Name = "Expiry";
+            this.Expiry.Width = 110;
+            // 
+            // Stock
+            // 
+            this.Stock.DataPropertyName = "Stock";
+            this.Stock.HeaderText = "Stock";
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            this.Stock.Visible = false;
+            this.Stock.Width = 65;
+            // 
+            // Qty
+            // 
+            this.Qty.DataPropertyName = "Qty";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle13;
+            this.Qty.HeaderText = "Qty";
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            this.Qty.Width = 60;
+            // 
+            // SellingPrice
+            // 
+            this.SellingPrice.DataPropertyName = "SellingPrice";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle14;
+            this.SellingPrice.HeaderText = "Selling Price";
+            this.SellingPrice.Name = "SellingPrice";
+            this.SellingPrice.ReadOnly = true;
+            // 
+            // WholesalePrice
+            // 
+            this.WholesalePrice.DataPropertyName = "WholesalePrice";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle15;
+            this.WholesalePrice.HeaderText = "Wholesale Price";
+            this.WholesalePrice.Name = "WholesalePrice";
+            this.WholesalePrice.ReadOnly = true;
+            // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(376, 19);
+            this.lblDate.Location = new System.Drawing.Point(668, 17);
             this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(39, 16);
@@ -143,7 +242,7 @@
             // dtpReferenceDocumentDate
             // 
             this.dtpReferenceDocumentDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReferenceDocumentDate.Location = new System.Drawing.Point(379, 38);
+            this.dtpReferenceDocumentDate.Location = new System.Drawing.Point(671, 36);
             this.dtpReferenceDocumentDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpReferenceDocumentDate.Name = "dtpReferenceDocumentDate";
             this.dtpReferenceDocumentDate.Size = new System.Drawing.Size(136, 23);
@@ -156,9 +255,6 @@
             // 
             this.cmbUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUnit.FormattingEnabled = true;
-            this.cmbUnit.Items.AddRange(new object[] {
-            "Kg",
-            "Nos"});
             this.cmbUnit.Location = new System.Drawing.Point(490, 5);
             this.cmbUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cmbUnit.Name = "cmbUnit";
@@ -212,10 +308,11 @@
             // lblTag
             // 
             this.lblTag.AutoSize = true;
-            this.lblTag.Location = new System.Drawing.Point(11, 13);
+            this.lblTag.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTag.Location = new System.Drawing.Point(10, 16);
             this.lblTag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTag.Name = "lblTag";
-            this.lblTag.Size = new System.Drawing.Size(120, 16);
+            this.lblTag.Size = new System.Drawing.Size(158, 18);
             this.lblTag.TabIndex = 67;
             this.lblTag.Text = "Label Description";
             // 
@@ -223,7 +320,7 @@
             // 
             this.cmbTag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTag.FormattingEnabled = true;
-            this.cmbTag.Location = new System.Drawing.Point(152, 10);
+            this.cmbTag.Location = new System.Drawing.Point(275, 13);
             this.cmbTag.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTag.Name = "cmbTag";
             this.cmbTag.Size = new System.Drawing.Size(344, 24);
@@ -234,6 +331,9 @@
             // grpHeader
             // 
             this.grpHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.grpHeader.Controls.Add(this.btnLoad);
+            this.grpHeader.Controls.Add(this.cmbDocNo);
+            this.grpHeader.Controls.Add(this.label1);
             this.grpHeader.Controls.Add(this.lblDate);
             this.grpHeader.Controls.Add(this.dtpReferenceDocumentDate);
             this.grpHeader.Controls.Add(this.txtReferenceDocumentNo);
@@ -244,9 +344,28 @@
             this.grpHeader.Size = new System.Drawing.Size(1293, 65);
             this.grpHeader.TabIndex = 153;
             // 
+            // cmbDocNo
+            // 
+            this.cmbDocNo.FormattingEnabled = true;
+            this.cmbDocNo.Location = new System.Drawing.Point(13, 34);
+            this.cmbDocNo.Name = "cmbDocNo";
+            this.cmbDocNo.Size = new System.Drawing.Size(195, 24);
+            this.cmbDocNo.TabIndex = 86;
+            this.cmbDocNo.Click += new System.EventHandler(this.cmbDocNo_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 16);
+            this.label1.TabIndex = 85;
+            this.label1.Text = "DocumentNo";
+            // 
             // txtReferenceDocumentNo
             // 
-            this.txtReferenceDocumentNo.Location = new System.Drawing.Point(8, 36);
+            this.txtReferenceDocumentNo.Location = new System.Drawing.Point(283, 35);
             this.txtReferenceDocumentNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtReferenceDocumentNo.Name = "txtReferenceDocumentNo";
             this.txtReferenceDocumentNo.Size = new System.Drawing.Size(268, 23);
@@ -258,7 +377,7 @@
             // lblPDocumentNo
             // 
             this.lblPDocumentNo.AutoSize = true;
-            this.lblPDocumentNo.Location = new System.Drawing.Point(5, 17);
+            this.lblPDocumentNo.Location = new System.Drawing.Point(281, 15);
             this.lblPDocumentNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPDocumentNo.Name = "lblPDocumentNo";
             this.lblPDocumentNo.Size = new System.Drawing.Size(67, 16);
@@ -342,7 +461,7 @@
             this.grpLeftFooter.Location = new System.Drawing.Point(3, 508);
             this.grpLeftFooter.Margin = new System.Windows.Forms.Padding(4);
             this.grpLeftFooter.Name = "grpLeftFooter";
-            this.grpLeftFooter.Size = new System.Drawing.Size(508, 50);
+            this.grpLeftFooter.Size = new System.Drawing.Size(640, 50);
             this.grpLeftFooter.TabIndex = 154;
             // 
             // panel1
@@ -350,10 +469,10 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.txtTotQty);
             this.panel1.Controls.Add(this.lblNetAmount);
-            this.panel1.Location = new System.Drawing.Point(512, 508);
+            this.panel1.Location = new System.Drawing.Point(651, 508);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 50);
+            this.panel1.Size = new System.Drawing.Size(645, 50);
             this.panel1.TabIndex = 155;
             // 
             // txtTotQty
@@ -403,101 +522,23 @@
             this.pictureBox2.TabIndex = 157;
             this.pictureBox2.TabStop = false;
             // 
-            // LineNo
+            // btnLoad
             // 
-            this.LineNo.DataPropertyName = "LineNo";
-            this.LineNo.HeaderText = "Row";
-            this.LineNo.Name = "LineNo";
-            this.LineNo.ReadOnly = true;
-            this.LineNo.Width = 35;
-            // 
-            // ProductCode
-            // 
-            this.ProductCode.DataPropertyName = "ProductCode";
-            this.ProductCode.HeaderText = "Product Code";
-            this.ProductCode.Name = "ProductCode";
-            this.ProductCode.ReadOnly = true;
-            this.ProductCode.Width = 133;
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "Product Name";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            this.ProductName.Width = 245;
-            // 
-            // Unit
-            // 
-            this.Unit.DataPropertyName = "UnitOfMeasure";
-            this.Unit.HeaderText = "Unit";
-            this.Unit.Name = "Unit";
-            this.Unit.Width = 65;
-            // 
-            // BatchNo
-            // 
-            this.BatchNo.DataPropertyName = "BatchNo";
-            this.BatchNo.HeaderText = "Batch No";
-            this.BatchNo.Name = "BatchNo";
-            this.BatchNo.ReadOnly = true;
-            this.BatchNo.Width = 140;
-            // 
-            // ManufDate
-            // 
-            this.ManufDate.DataPropertyName = "ManufDate";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ManufDate.HeaderText = "Manuf Date";
-            this.ManufDate.Name = "ManufDate";
-            this.ManufDate.Width = 110;
-            // 
-            // Expiry
-            // 
-            this.Expiry.DataPropertyName = "ExpiryDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Expiry.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Expiry.HeaderText = "Expiry Date";
-            this.Expiry.Name = "Expiry";
-            this.Expiry.Width = 110;
-            // 
-            // Stock
-            // 
-            this.Stock.DataPropertyName = "Stock";
-            this.Stock.HeaderText = "Stock";
-            this.Stock.Name = "Stock";
-            this.Stock.ReadOnly = true;
-            this.Stock.Visible = false;
-            this.Stock.Width = 65;
-            // 
-            // Qty
-            // 
-            this.Qty.DataPropertyName = "Qty";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Qty.HeaderText = "Qty";
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            this.Qty.Width = 60;
-            // 
-            // SellingPrice
-            // 
-            this.SellingPrice.DataPropertyName = "SellingPrice";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle4;
-            this.SellingPrice.HeaderText = "Selling Price";
-            this.SellingPrice.Name = "SellingPrice";
-            this.SellingPrice.ReadOnly = true;
-            // 
-            // WholesalePrice
-            // 
-            this.WholesalePrice.DataPropertyName = "WholesalePrice";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle5;
-            this.WholesalePrice.HeaderText = "Wholesale Price";
-            this.WholesalePrice.Name = "WholesalePrice";
-            this.WholesalePrice.ReadOnly = true;
+            this.btnLoad.AutoSize = true;
+            this.btnLoad.BackColor = System.Drawing.Color.BlueViolet;
+            this.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLoad.Depth = 0;
+            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnLoad.Location = new System.Drawing.Point(215, 27);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLoad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Primary = false;
+            this.btnLoad.Size = new System.Drawing.Size(46, 36);
+            this.btnLoad.TabIndex = 87;
+            this.btnLoad.Text = "Load\r\n";
+            this.btnLoad.UseVisualStyleBackColor = false;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // FrmBarcode
             // 
@@ -576,5 +617,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn SellingPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn WholesalePrice;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbDocNo;
+        private MaterialSkin.Controls.MaterialFlatButton btnLoad;
     }
 }

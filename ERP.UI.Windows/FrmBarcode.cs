@@ -52,7 +52,7 @@ namespace ERP.UI.Windows
 
                 Common.EnableButton(false, btnSave);
                 grpBody.Enabled = false;
-                grpLeftFooter.Enabled = false;
+                //grpLeftFooter.Enabled = false;
                 referenceDocumentID = 0;
                 referenceDocumentDate = Common.GetSystemDateWithTime();
                 invBarcodeDetailTempList = null;
@@ -61,6 +61,13 @@ namespace ERP.UI.Windows
                 selectedRowIndex = 0;
                 isUpdateGrid = false;
                 rowCount = 0;
+
+                cmbTag.Enabled = true;
+                InvBarCodeService invBarCodeService = new InvBarCodeService();
+
+                Common.SetAutoBindRecords(cmbTag, invBarCodeService.GetLabel());
+                Common.SetAutoBindRecords(cmbUnit, invBarCodeService.GetUnitOfMeasure());
+                Common.SetAutoBindRecords(cmbDocNo, invBarCodeService.GetDocumentNos());
 
                 dtpExpiry.Value = DateTime.Now;
                 dtpManufDate.Value = DateTime.Now;
@@ -96,15 +103,14 @@ namespace ERP.UI.Windows
                 Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
                 return string.Empty;
             }
-        } 
-        
+        }
+
 
         public override void FormLoad()
         {
             try
             {
                 dgvItemDetails.AutoGenerateColumns = false;
-             
 
                 documentID = 0;
                 this.Text = "Lable Printing"; //autoGenerateInfo.FormText.Trim();
@@ -114,10 +120,14 @@ namespace ERP.UI.Windows
                 dtpReferenceDocumentDate.Enabled = false;
 
                 GetPrintingDetails();
+                InvBarCodeService invBarCodeService = new InvBarCodeService();
+                string docNo = invBarCodeService.GetDocumentNo();
 
+                cmbDocNo.Text = docNo;
                 dtpReferenceDocumentDate.Value = Common.GetSystemDateWithTime();
                 isInvProduct = true;
                 base.FormLoad();
+                txtReferenceDocumentNo.Focus();
             }
             catch (Exception ex)
             {
@@ -129,7 +139,7 @@ namespace ERP.UI.Windows
         {
             batchNumber = batchNo;
         }
-          
+
         private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -138,13 +148,13 @@ namespace ERP.UI.Windows
                 {
                     if (txtProductCode.Text.Trim().Equals(string.Empty))
                     {
-                       txtProductCode.Enabled = true;
-                       txtProductCode.Focus();
-                       return;
+                        txtProductCode.Enabled = true;
+                        txtProductCode.Focus();
+                        return;
                     }
                     else
                     {
-                       txtProductCode_Leave(this, e);
+                        txtProductCode_Leave(this, e);
                     }
                 }
             }
@@ -196,7 +206,7 @@ namespace ERP.UI.Windows
         {
             try
             {
-                 
+
             }
             catch (Exception ex)
             {
@@ -232,7 +242,7 @@ namespace ERP.UI.Windows
                     invBarcodeDetail.Stock = 0;
                     invBarcodeDetail.DocumentDate = dtpReferenceDocumentDate.Value;
                     invBarcodeDetail.SupplierCode = "";
-    
+
 
                     InvBarCodeService invBarCodeService = new InvBarCodeService();
 
@@ -333,6 +343,8 @@ namespace ERP.UI.Windows
                 dgvItemDetails.Refresh();
                 barcode = "";
                 base.ClearForm();
+                InitializeForm();
+                FormLoad();
             }
             catch (Exception ex)
             {
@@ -340,7 +352,7 @@ namespace ERP.UI.Windows
             }
         }
 
-        private void  txtReferenceDocumentNo_KeyDown(object sender, KeyEventArgs e)
+        private void txtReferenceDocumentNo_KeyDown(object sender, KeyEventArgs e)
         {
 
             try
@@ -443,11 +455,12 @@ namespace ERP.UI.Windows
         public override void Save()
         {
             try
-            {                
+            {
                 this.Cursor = Cursors.WaitCursor;
                 InvBarCodeService invBarcodeService = new InvBarCodeService();
-                string NewDocumentNo;
-                bool saveDocument = invBarcodeService.Save(invBarcodeDetailTempList, out NewDocumentNo, this.Name);
+                string NewDocumentNo = invBarcodeService.GetDocumentNo();
+
+                bool saveDocument = invBarcodeService.Save(invBarcodeDetailTempList, NewDocumentNo, this.Name);
 
                 if (saveDocument)
                 {
@@ -461,7 +474,7 @@ namespace ERP.UI.Windows
                     else
                     {
                         Toast.Show(this.Text, NewDocumentNo, "", Toast.messageType.Error, Toast.messageAction.Print);
-                        return;
+                        ClearForm();
                     }
                 }
                 else
@@ -504,11 +517,7 @@ namespace ERP.UI.Windows
                 txtFileName = "bar.txt";
                 exeFileName = "Barcode.exe";
 
-                //referenceType = lookUpReferenceService.GetLookUpReferenceByValue(((int)LookUpReference.TagType).ToString(), cmbTag.Text.Trim());
-                //if (referenceType != null)
-                //{
-                //    tagFileName = string.Concat(referenceType.LookupValue, ".lbx");
-                //}
+                tagFileName = cmbTag.Text.Trim();
 
                 @appPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "BarCode");
 
@@ -525,7 +534,7 @@ namespace ERP.UI.Windows
 
                 //@destinationPath = @barcodeTextPath;
 
-                
+
 
                 //if (!folderExists)
                 //{
@@ -542,200 +551,201 @@ namespace ERP.UI.Windows
 
                     foreach (InvBarcodeDetailTemp invBarcodeDetailTemp in invBarcodeDetailTempList)
                     {
-                       // if (invBarcodeDetailTemp.IsBatch)
+                        // if (invBarcodeDetailTemp.IsBatch)
                         {
-                            //for (int count = 0; count < invBarcodeDetailTemp.Qty; count = count + 1)
-                            //{
-                            //    string strSellingPrice = (string.Format("{0:#0.##}", invBarcodeDetailTemp.SellingPrice));
+                            for (int count = 0; count < invBarcodeDetailTemp.Qty; count = count + 1)
+                            {
+                                //    string strSellingPrice = (string.Format("{0:#0.##}", invBarcodeDetailTemp.SellingPrice));
 
-                            //    string str1;
-                            //    string str2;
-                            //    string str3;
-                            //    string str4;
-                            //    string str5;
-                            //    string str6;
-                            //    string str7;
-                            //    string str8;
-                            //    string str9;
-                            //    string str0;
-                            //    int intLoop;
-                            //    string strCostCode;
+                                //    string str1;
+                                //    string str2;
+                                //    string str3;
+                                //    string str4;
+                                //    string str5;
+                                //    string str6;
+                                //    string str7;
+                                //    string str8;
+                                //    string str9;
+                                //    string str0;
+                                //    int intLoop;
+                                //    string strCostCode;
 
-                            //    strCostCode = "CANTJUMPEX";
+                                //    strCostCode = "CANTJUMPEX";
 
-                            //    str1 = strCostCode.Substring(1, 1);
-                            //    str2 = strCostCode.Substring(2, 1);
-                            //    str3 = strCostCode.Substring(3, 1);
-                            //    str4 = strCostCode.Substring(4, 1);
-                            //    str5 = strCostCode.Substring(5, 1);
-                            //    str6 = strCostCode.Substring(6, 1);
-                            //    str7 = strCostCode.Substring(7, 1);
-                            //    str8 = strCostCode.Substring(8, 1);
-                            //    str9 = strCostCode.Substring(9, 1);
-                            //    str0 = strCostCode.Substring(10, 1);
-
-
-                            //    String strCostPrice;
-                            //    String strCode;
+                                //    str1 = strCostCode.Substring(1, 1);
+                                //    str2 = strCostCode.Substring(2, 1);
+                                //    str3 = strCostCode.Substring(3, 1);
+                                //    str4 = strCostCode.Substring(4, 1);
+                                //    str5 = strCostCode.Substring(5, 1);
+                                //    str6 = strCostCode.Substring(6, 1);
+                                //    str7 = strCostCode.Substring(7, 1);
+                                //    str8 = strCostCode.Substring(8, 1);
+                                //    str9 = strCostCode.Substring(9, 1);
+                                //    str0 = strCostCode.Substring(10, 1);
 
 
-
-                            //    strCode = "";
-
-                            //    for (int xcount = 1; count < strSellingPrice.Length; count = count + 1)
-                            //    {
-                            //        switch (Common.ConvertStringToInt(strSellingPrice.Substring(xcount, 1)))
-                            //        {
-                            //            case 0:
-                            //                strCode = strCode + str0;
-                            //                break;
-                            //            case 1:
-                            //                strCode = strCode + str1;
-                            //                break;
-                            //            case 2:
-                            //                strCode = strCode + str2;
-                            //                break;
-                            //            case 3:
-                            //                strCode = strCode + str3;
-                            //                break;
-                            //            case 4:
-                            //                strCode = strCode + str4;
-                            //                break;
-                            //            case 5:
-                            //                strCode = strCode + str5;
-                            //                break;
-                            //            case 6:
-                            //                strCode = strCode + str6;
-                            //                break;
-                            //            case 7:
-                            //                strCode = strCode + str7;
-                            //                break;
-                            //            case 8:
-                            //                strCode = strCode + str8;
-                            //                break;
-                            //            case 9:
-                            //                strCode = strCode + str9;
-                            //                break;
-                            //        }
-                            //    }
-                            //    strCode = strCode + "." + str0 + str0;
-                            //    string EncryptedCostPrice = strCode;
+                                //    String strCostPrice;
+                                //    String strCode;
 
 
 
+                                //    strCode = "";
+
+                                //    for (int xcount = 1; count < strSellingPrice.Length; count = count + 1)
+                                //    {
+                                //        switch (Common.ConvertStringToInt(strSellingPrice.Substring(xcount, 1)))
+                                //        {
+                                //            case 0:
+                                //                strCode = strCode + str0;
+                                //                break;
+                                //            case 1:
+                                //                strCode = strCode + str1;
+                                //                break;
+                                //            case 2:
+                                //                strCode = strCode + str2;
+                                //                break;
+                                //            case 3:
+                                //                strCode = strCode + str3;
+                                //                break;
+                                //            case 4:
+                                //                strCode = strCode + str4;
+                                //                break;
+                                //            case 5:
+                                //                strCode = strCode + str5;
+                                //                break;
+                                //            case 6:
+                                //                strCode = strCode + str6;
+                                //                break;
+                                //            case 7:
+                                //                strCode = strCode + str7;
+                                //                break;
+                                //            case 8:
+                                //                strCode = strCode + str8;
+                                //                break;
+                                //            case 9:
+                                //                strCode = strCode + str9;
+                                //                break;
+                                //        }
+                                //    }
+                                //    strCode = strCode + "." + str0 + str0;
+                                //    string EncryptedCostPrice = strCode;
 
 
-                            m_streamWriter.WriteLine(invBarcodeDetailTemp.ProductCode + "," +
-                                                           invBarcodeDetailTemp.ProductName + "," +
-                                                                invBarcodeDetailTemp.UnitOfMeasure + ", " +
-                                                                invBarcodeDetailTemp.BatchNo + ", " +
-                                                                Convert.ToDateTime(invBarcodeDetailTemp.ManufDate.ToString()).ToString("dd-MM-yyyy") + "," +
-                                                                Convert.ToDateTime(invBarcodeDetailTemp.ExpiryDate.ToString()).ToString("dd-MM-yyyy") + "," + 
-                                                                invBarcodeDetailTemp.Qty + "," +
-                                                                invBarcodeDetailTemp.SellingPrice + "," +
-                                                                invBarcodeDetailTemp.WholesalePrice);
+
+
+
+                                m_streamWriter.WriteLine(invBarcodeDetailTemp.ProductCode + "," +
+                                                               invBarcodeDetailTemp.ProductName + "," +
+                                                                    invBarcodeDetailTemp.UnitOfMeasure + ", " +
+                                                                    invBarcodeDetailTemp.BatchNo + ", " +
+                                                                    Convert.ToDateTime(invBarcodeDetailTemp.ManufDate.ToString()).ToString("dd-MM-yyyy") + "," +
+                                                                    Convert.ToDateTime(invBarcodeDetailTemp.ExpiryDate.ToString()).ToString("dd-MM-yyyy") + "," +
+                                                                    invBarcodeDetailTemp.Qty + "," +
+                                                                    invBarcodeDetailTemp.SellingPrice + "," +
+                                                                    invBarcodeDetailTemp.WholesalePrice);
                             }
                         }
-                    //    else
-                    //    {
-                    //        for (int count = 0; count < invBarcodeDetailTemp.Qty; count = count + 1)
-                    //        {
-                    //            string strSellingPrice = (string.Format("{0:#0.##}", invBarcodeDetailTemp.SellingPrice));
-                    //            string strCostPrice = (string.Format("{0:0.##}", invBarcodeDetailTemp.CostPrice));
+                        //    else
+                        //    {
+                        //        for (int count = 0; count < invBarcodeDetailTemp.Qty; count = count + 1)
+                        //        {
+                        //            string strSellingPrice = (string.Format("{0:#0.##}", invBarcodeDetailTemp.SellingPrice));
+                        //            string strCostPrice = (string.Format("{0:0.##}", invBarcodeDetailTemp.CostPrice));
 
-                    //            string str1;
-                    //            string str2;
-                    //            string str3;
-                    //            string str4;
-                    //            string str5;
-                    //            string str6;
-                    //            string str7;
-                    //            string str8;
-                    //            string str9;
-                    //            string str0;
-                    //            int intLoop;
-                    //            string strCostCode;
-
-
-
-                    //            strCostCode = "CANTJUMPEX";
-
-
-                    //            str1 = strCostCode.Substring(0, 1);
-                    //            str2 = strCostCode.Substring(1, 1);
-                    //            str3 = strCostCode.Substring(2, 1);
-                    //            str4 = strCostCode.Substring(3, 1);
-                    //            str5 = strCostCode.Substring(4, 1);
-                    //            str6 = strCostCode.Substring(5, 1);
-                    //            str7 = strCostCode.Substring(6, 1);
-                    //            str8 = strCostCode.Substring(7, 1);
-                    //            str9 = strCostCode.Substring(8, 1);
-                    //            str0 = strCostCode.Substring(9,1);
-
- 
-                    //            String strCode;
+                        //            string str1;
+                        //            string str2;
+                        //            string str3;
+                        //            string str4;
+                        //            string str5;
+                        //            string str6;
+                        //            string str7;
+                        //            string str8;
+                        //            string str9;
+                        //            string str0;
+                        //            int intLoop;
+                        //            string strCostCode;
 
 
 
-                    //            strCode = "";
+                        //            strCostCode = "CANTJUMPEX";
 
-                    //            for (int xcount = 0; xcount < strCostPrice.Length; xcount = xcount + 1)
-                    //            {
-                    //                switch (Common.ConvertStringToInt(strCostPrice.Substring(xcount, 1)))
-                    //                {
-                    //                    case 0:
-                    //                        strCode = strCode + str0;
-                    //                        break;
-                    //                    case 1:
-                    //                        strCode = strCode + str1;
-                    //                        break;
-                    //                    case 2:
-                    //                        strCode = strCode + str2;
-                    //                        break;
-                    //                    case 3:
-                    //                        strCode = strCode + str3;
-                    //                        break;
-                    //                    case 4:
-                    //                        strCode = strCode + str4;
-                    //                        break;
-                    //                    case 5:
-                    //                        strCode = strCode + str5;
-                    //                        break;
-                    //                    case 6:
-                    //                        strCode = strCode + str6;
-                    //                        break;
-                    //                    case 7:
-                    //                        strCode = strCode + str7;
-                    //                        break;
-                    //                    case 8:
-                    //                        strCode = strCode + str8;
-                    //                        break;
-                    //                    case 9:
-                    //                        strCode = strCode + str9;
-                    //                        break;
-                    //                }
-                    //            }
-                    //           // strCode = strCode + "." + str0 + str0;
-                    //            string EncryptedCostPrice = strCode;
 
-                    //            m_streamWriter.WriteLine(invBarcodeDetailTemp.ProductID + "," +
-                    //                                            invBarcodeDetailTemp.ProductCode + "," +
-                    //                                            invBarcodeDetailTemp.ProductName + ", " +
-                    //                                            invBarcodeDetailTemp.ProductCode + ", " +
-                    //                                            invBarcodeDetailTemp.BatchNo + "," +
-                    //                                            invBarcodeDetailTemp.UnitOfMeasure + "," +
-                    //                                            invBarcodeDetailTemp.ExpiryDate + "," +
-                    //                                            invBarcodeDetailTemp.ManufDate + "," +
-                    //                                            invBarcodeDetailTemp.Qty + "," +
-                    //                                            invBarcodeDetailTemp.SellingPrice + "," +
-                    //                                            invBarcodeDetailTemp.WholesalePrice);
-                    //        }
-                    //    }
-                    //}
+                        //            str1 = strCostCode.Substring(0, 1);
+                        //            str2 = strCostCode.Substring(1, 1);
+                        //            str3 = strCostCode.Substring(2, 1);
+                        //            str4 = strCostCode.Substring(3, 1);
+                        //            str5 = strCostCode.Substring(4, 1);
+                        //            str6 = strCostCode.Substring(5, 1);
+                        //            str7 = strCostCode.Substring(6, 1);
+                        //            str8 = strCostCode.Substring(7, 1);
+                        //            str9 = strCostCode.Substring(8, 1);
+                        //            str0 = strCostCode.Substring(9,1);
+
+
+                        //            String strCode;
+
+
+
+                        //            strCode = "";
+
+                        //            for (int xcount = 0; xcount < strCostPrice.Length; xcount = xcount + 1)
+                        //            {
+                        //                switch (Common.ConvertStringToInt(strCostPrice.Substring(xcount, 1)))
+                        //                {
+                        //                    case 0:
+                        //                        strCode = strCode + str0;
+                        //                        break;
+                        //                    case 1:
+                        //                        strCode = strCode + str1;
+                        //                        break;
+                        //                    case 2:
+                        //                        strCode = strCode + str2;
+                        //                        break;
+                        //                    case 3:
+                        //                        strCode = strCode + str3;
+                        //                        break;
+                        //                    case 4:
+                        //                        strCode = strCode + str4;
+                        //                        break;
+                        //                    case 5:
+                        //                        strCode = strCode + str5;
+                        //                        break;
+                        //                    case 6:
+                        //                        strCode = strCode + str6;
+                        //                        break;
+                        //                    case 7:
+                        //                        strCode = strCode + str7;
+                        //                        break;
+                        //                    case 8:
+                        //                        strCode = strCode + str8;
+                        //                        break;
+                        //                    case 9:
+                        //                        strCode = strCode + str9;
+                        //                        break;
+                        //                }
+                        //            }
+                        //           // strCode = strCode + "." + str0 + str0;
+                        //            string EncryptedCostPrice = strCode;
+
+                        //            m_streamWriter.WriteLine(invBarcodeDetailTemp.ProductID + "," +
+                        //                                            invBarcodeDetailTemp.ProductCode + "," +
+                        //                                            invBarcodeDetailTemp.ProductName + ", " +
+                        //                                            invBarcodeDetailTemp.ProductCode + ", " +
+                        //                                            invBarcodeDetailTemp.BatchNo + "," +
+                        //                                            invBarcodeDetailTemp.UnitOfMeasure + "," +
+                        //                                            invBarcodeDetailTemp.ExpiryDate + "," +
+                        //                                            invBarcodeDetailTemp.ManufDate + "," +
+                        //                                            invBarcodeDetailTemp.Qty + "," +
+                        //                                            invBarcodeDetailTemp.SellingPrice + "," +
+                        //                                            invBarcodeDetailTemp.WholesalePrice);
+                        //        }
+                        //    }
+                        //} 
+                    }
                     m_streamWriter.Close();
                     fileStream.Close();
 
-                    if (File.Exists(@appPath + @"\\" + txtFileName))
+                    if (File.Exists(@appPath + @"\\" + tagFileName))
                     {
                         Process.Start(@appPath + @"\\" + tagFileName);
                         //Process.Start(@destinationPath + @"\\" + exeFileName);
@@ -788,7 +798,7 @@ namespace ERP.UI.Windows
 
             try
             {
- 
+
             }
             catch (Exception ex)
             {
@@ -796,7 +806,7 @@ namespace ERP.UI.Windows
             }
         }
 
-        private void cmbPrinter_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbPrinter_SelectedValueChdanged(object sender, EventArgs e)
         {
             try
             {
@@ -884,7 +894,7 @@ namespace ERP.UI.Windows
             {
                 Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
             }
-          
+
         }
 
         private void txtBatchNo_Leave(object sender, EventArgs e)
@@ -942,7 +952,7 @@ namespace ERP.UI.Windows
             {
                 Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
             }
-             
+
         }
 
         private void txtWholesalePrice_KeyDown(object sender, KeyEventArgs e)
@@ -959,6 +969,35 @@ namespace ERP.UI.Windows
             {
                 Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
             }
+        }
+
+        private void cmbDocNo_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            InvBarCodeService invBarCodeService = new InvBarCodeService();
+            if (cmbDocNo.Text.Trim() != "")
+            {
+                invBarcodeDetailTempList = invBarCodeService.GetDocument(cmbDocNo.Text.Trim());
+                if (invBarcodeDetailTempList == null)
+                {
+                    Toast.Show(this.Text, "Document No", txtReferenceDocumentNo.Text.Trim(), Toast.messageType.Information, Toast.messageAction.NotExists);
+                    txtReferenceDocumentNo.Focus();
+                    return;
+                }
+                else
+                {
+                    RefreshGrid();
+                    Common.EnableButton(true, btnSave);
+                    txtProductCode.Focus();
+                    return;
+                }
+            }
+
         }
     }
 }
