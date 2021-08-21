@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItemDetails = new System.Windows.Forms.DataGridView();
             this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +55,8 @@
             this.lblTag = new System.Windows.Forms.Label();
             this.cmbTag = new System.Windows.Forms.ComboBox();
             this.grpHeader = new System.Windows.Forms.Panel();
+            this.chkOverWrite = new System.Windows.Forms.CheckBox();
+            this.btnLoad = new MaterialSkin.Controls.MaterialFlatButton();
             this.cmbDocNo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtReferenceDocumentNo = new System.Windows.Forms.TextBox();
@@ -70,7 +72,6 @@
             this.lblNetAmount = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnLoad = new MaterialSkin.Controls.MaterialFlatButton();
             this.grpButtonSet2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemDetails)).BeginInit();
@@ -175,9 +176,9 @@
             // ManufDate
             // 
             this.ManufDate.DataPropertyName = "ManufDate";
-            dataGridViewCellStyle11.Format = "d";
-            dataGridViewCellStyle11.NullValue = null;
-            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.ManufDate.HeaderText = "Manuf Date";
             this.ManufDate.Name = "ManufDate";
             this.ManufDate.Width = 110;
@@ -185,9 +186,9 @@
             // Expiry
             // 
             this.Expiry.DataPropertyName = "ExpiryDate";
-            dataGridViewCellStyle12.Format = "d";
-            dataGridViewCellStyle12.NullValue = null;
-            this.Expiry.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle7.Format = "d";
+            dataGridViewCellStyle7.NullValue = null;
+            this.Expiry.DefaultCellStyle = dataGridViewCellStyle7;
             this.Expiry.HeaderText = "Expiry Date";
             this.Expiry.Name = "Expiry";
             this.Expiry.Width = 110;
@@ -204,8 +205,8 @@
             // Qty
             // 
             this.Qty.DataPropertyName = "Qty";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle8;
             this.Qty.HeaderText = "Qty";
             this.Qty.Name = "Qty";
             this.Qty.ReadOnly = true;
@@ -214,8 +215,8 @@
             // SellingPrice
             // 
             this.SellingPrice.DataPropertyName = "SellingPrice";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.SellingPrice.HeaderText = "Selling Price";
             this.SellingPrice.Name = "SellingPrice";
             this.SellingPrice.ReadOnly = true;
@@ -223,8 +224,8 @@
             // WholesalePrice
             // 
             this.WholesalePrice.DataPropertyName = "WholesalePrice";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle10;
             this.WholesalePrice.HeaderText = "Wholesale Price";
             this.WholesalePrice.Name = "WholesalePrice";
             this.WholesalePrice.ReadOnly = true;
@@ -331,6 +332,7 @@
             // grpHeader
             // 
             this.grpHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.grpHeader.Controls.Add(this.chkOverWrite);
             this.grpHeader.Controls.Add(this.btnLoad);
             this.grpHeader.Controls.Add(this.cmbDocNo);
             this.grpHeader.Controls.Add(this.label1);
@@ -343,6 +345,37 @@
             this.grpHeader.Name = "grpHeader";
             this.grpHeader.Size = new System.Drawing.Size(1293, 65);
             this.grpHeader.TabIndex = 153;
+            // 
+            // chkOverWrite
+            // 
+            this.chkOverWrite.AutoSize = true;
+            this.chkOverWrite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOverWrite.Location = new System.Drawing.Point(870, 36);
+            this.chkOverWrite.Name = "chkOverWrite";
+            this.chkOverWrite.Size = new System.Drawing.Size(93, 20);
+            this.chkOverWrite.TabIndex = 88;
+            this.chkOverWrite.Text = "Overwrite ";
+            this.chkOverWrite.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.chkOverWrite.UseVisualStyleBackColor = true;
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.AutoSize = true;
+            this.btnLoad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLoad.BackColor = System.Drawing.Color.BlueViolet;
+            this.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLoad.Depth = 0;
+            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnLoad.Location = new System.Drawing.Point(215, 27);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLoad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Primary = false;
+            this.btnLoad.Size = new System.Drawing.Size(46, 36);
+            this.btnLoad.TabIndex = 87;
+            this.btnLoad.Text = "Load\r\n";
+            this.btnLoad.UseVisualStyleBackColor = false;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // cmbDocNo
             // 
@@ -522,24 +555,6 @@
             this.pictureBox2.TabIndex = 157;
             this.pictureBox2.TabStop = false;
             // 
-            // btnLoad
-            // 
-            this.btnLoad.AutoSize = true;
-            this.btnLoad.BackColor = System.Drawing.Color.BlueViolet;
-            this.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnLoad.Depth = 0;
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnLoad.Location = new System.Drawing.Point(215, 27);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnLoad.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Primary = false;
-            this.btnLoad.Size = new System.Drawing.Size(46, 36);
-            this.btnLoad.TabIndex = 87;
-            this.btnLoad.Text = "Load\r\n";
-            this.btnLoad.UseVisualStyleBackColor = false;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
             // FrmBarcode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -620,5 +635,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbDocNo;
         private MaterialSkin.Controls.MaterialFlatButton btnLoad;
+        private System.Windows.Forms.CheckBox chkOverWrite;
     }
 }

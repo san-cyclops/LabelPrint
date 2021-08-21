@@ -13,40 +13,40 @@ namespace ERP.Service
     public class InvBarCodeService
     {
         string str = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Database\Database.mdb;User Id=admin;Password=;";
-         
-        public List<InvBarcodeDetailTemp> getUpdateBarCodeDetailTemp(List<InvBarcodeDetailTemp> invBarcodeDetailTempList, InvBarcodeDetailTemp invBarcodeDetail)
+
+        public List<InvBarcodeDetailTemp> getUpdateBarCodeDetailTemp(List<InvBarcodeDetailTemp> invBarcodeDetailTempList, InvBarcodeDetailTemp invBarcodeDetail,bool overWrite)
         {
             InvBarcodeDetailTemp invBarcodeDetailTemp = new InvBarcodeDetailTemp();
 
 
             //invBarcodeDetailTemp = invBarcodeDetailTempList.Where(p => p.ProductID == invBarcodeDetail.ProductID && p.BatchNo == invBarcodeDetail.BatchNo).FirstOrDefault();
 
-            if(invBarcodeDetailTempList != null)
+            if (invBarcodeDetailTempList != null)
             {
                 invBarcodeDetailTemp = invBarcodeDetailTempList.Where(p => p.ProductCode == invBarcodeDetail.ProductCode && p.UnitOfMeasure == invBarcodeDetail.UnitOfMeasure && p.BatchNo == invBarcodeDetail.BatchNo).FirstOrDefault();
             }
 
-             
+
             if (invBarcodeDetailTemp == null || invBarcodeDetailTemp.LineNo.Equals(0))
             {
                 invBarcodeDetailTemp = invBarcodeDetail;
                 if (invBarcodeDetailTempList == null)
-                {invBarcodeDetailTemp.LineNo = 1;}
+                { invBarcodeDetailTemp.LineNo = 1; }
                 else
-                { invBarcodeDetailTemp.LineNo = invBarcodeDetailTempList.Max(s => s.LineNo) + 1;}
+                { invBarcodeDetailTemp.LineNo = invBarcodeDetailTempList.Max(s => s.LineNo) + 1; }
             }
             else
             {
                 invBarcodeDetailTempList.Remove(invBarcodeDetailTemp);
                 invBarcodeDetail.LineNo = invBarcodeDetailTemp.LineNo;
-                invBarcodeDetail.Qty = invBarcodeDetailTemp.Qty + invBarcodeDetail.Qty; 
+                invBarcodeDetail.Qty = overWrite == false ? invBarcodeDetail.Qty + invBarcodeDetailTemp.Qty : invBarcodeDetail.Qty;
                 invBarcodeDetailTemp = invBarcodeDetail;
             }
             if (invBarcodeDetailTempList == null)
             {
                 invBarcodeDetailTempList = new List<InvBarcodeDetailTemp>();
             }
-                invBarcodeDetailTempList.Add(invBarcodeDetailTemp);
+            invBarcodeDetailTempList.Add(invBarcodeDetailTemp);
 
             return invBarcodeDetailTempList.OrderBy(pd => pd.LineNo).ToList();
         }
@@ -64,7 +64,7 @@ namespace ERP.Service
             }
 
 
-           // invBarcodeDetailTempList.ToList().Where(x => x.LineNo > removedLineNo).ForEach(x => x.LineNo = x.LineNo - 1);
+            // invBarcodeDetailTempList.ToList().Where(x => x.LineNo > removedLineNo).ForEach(x => x.LineNo = x.LineNo - 1);
             return invBarcodeDetailTempList.OrderBy(pd => pd.LineNo).ToList();
         }
 
@@ -85,15 +85,15 @@ namespace ERP.Service
                 con.Open();
                 //cmdd.ExecuteNonQuery();
                 dr = cmdd.ExecuteReader();
-                
-                int x=0;
+
+                int x = 0;
                 string[] strList = new string[count];
 
                 while (dr.Read())
                 {
                     strList[x] = dr["lablename"].ToString();
-                    x++; 
-                } 
+                    x++;
+                }
                 con.Close();
                 return strList;
             }
@@ -136,7 +136,7 @@ namespace ERP.Service
                 string statement = "SELECT DocumentNo FROM [InvBarCodeConfig]";
                 OleDbCommand cmd = new OleDbCommand(statement, con);
                 con.Open();
-                int count = (int)cmd.ExecuteScalar()+1;
+                int count = (int)cmd.ExecuteScalar() + 1;
                 con.Close();
                 string getNewCode = "LBL" + new StringBuilder().Insert(0, "0", 6 - (count.ToString().Length)) + count.ToString();
                 return getNewCode;
@@ -148,7 +148,7 @@ namespace ERP.Service
             int x = Convert.ToInt32(documentNo.Substring(3, 6));
             using (OleDbConnection con = new OleDbConnection(str))
             {
-                string command = "update InvBarCodeConfig set DocumentNo = " + x ;
+                string command = "update InvBarCodeConfig set DocumentNo = " + x;
                 OleDbCommand cmdd = new OleDbCommand(command, con);
                 con.Open();
                 cmdd.ExecuteNonQuery();
@@ -160,7 +160,7 @@ namespace ERP.Service
         {
             using (OleDbConnection con = new OleDbConnection(str))
             {
-                string statement = "SELECT Count(*) AS N FROM (SELECT DISTINCT DocumentNo FROM InvBarcode) AS T"; 
+                string statement = "SELECT Count(*) AS N FROM (SELECT DISTINCT DocumentNo FROM InvBarcode) AS T";
                 OleDbCommand cmd = new OleDbCommand(statement, con);
                 con.Open();
                 int count = (int)cmd.ExecuteScalar();
@@ -174,7 +174,7 @@ namespace ERP.Service
                 dr = cmdd.ExecuteReader();
 
                 int x = 0;
-                string[] strList = new string[count];   
+                string[] strList = new string[count];
 
                 while (dr.Read())
                 {
@@ -230,17 +230,23 @@ namespace ERP.Service
                 return null;
 
             }
-           
+        }
+
+        public InvBarcodeDetailTemp getBarCodeDetailTemp(List<InvBarcodeDetailTemp> InvBarcodeDetailTemp, string strProductCode, string unitOfMeasure, string batchNo)
+        {
+            InvBarcodeDetailTemp invBarcodeDetailTemp = new InvBarcodeDetailTemp();
+
+            invBarcodeDetailTemp = InvBarcodeDetailTemp.Where(p => p.ProductCode == strProductCode && p.BatchNo == batchNo && p.UnitOfMeasure == unitOfMeasure).FirstOrDefault();
+
+            return invBarcodeDetailTemp;
         }
 
         public bool Save(List<InvBarcodeDetailTemp> invBarcodeDetailTemp, string newDocumentNo, string formName = "")
         {
-            
             {
-                //newDocumentNo = "001";
+
 
                 updateDocumentNo(newDocumentNo);
-
 
                 string DocumentNo = newDocumentNo;
 
@@ -255,20 +261,40 @@ namespace ERP.Service
 
 
                 using (OleDbConnection con = new OleDbConnection(str))
-                { 
+                {
                     foreach (var obj in invBarcodeDetailTemp)
-                    { 
+                    {
                         string command = "insert into InvBarcode(InvBarcodeID,DocumentNo, DocumentDate, LineNo, ProductCode, ProductName, ExpiryDate, ManufDate, BatchNo, Qty, WholesalePrice, SellingPrice, UnitOfMeasure) values(0,'" + obj.DocumentNo + "','" + obj.DocumentDate + "','" + obj.LineNo + "','" + obj.ProductCode + "','" + obj.ProductName + "','" + obj.ExpiryDate + "','" + obj.ManufDate + "','" + obj.BatchNo + "','" + obj.Qty + "','" + obj.WholesalePrice + "','" + obj.SellingPrice + "','" + obj.UnitOfMeasure + "') ";
                         OleDbCommand cmdd = new OleDbCommand(command, con);
                         con.Open();
                         cmdd.ExecuteNonQuery();
-                        con.Close();  
+                        con.Close();
                     }
                 }
 
-    
+
                 return true;
             }
+        }
+        public bool Delete(string documentNo)
+        {
+            try
+            {
+                using (OleDbConnection con = new OleDbConnection(str))
+                {
+                    string command = "delete from InvBarcode where DocumentNo = '" + documentNo + "'";
+                    OleDbCommand cmdd = new OleDbCommand(command, con);
+                    con.Open();
+                    cmdd.ExecuteNonQuery();
+                    con.Close();
+
+                }
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            } 
         }
 
 

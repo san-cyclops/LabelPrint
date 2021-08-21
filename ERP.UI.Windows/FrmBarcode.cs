@@ -247,7 +247,7 @@ namespace ERP.UI.Windows
                     InvBarCodeService invBarCodeService = new InvBarCodeService();
 
                     dgvItemDetails.DataSource = null;
-                    invBarcodeDetailTempList = invBarCodeService.getUpdateBarCodeDetailTemp(invBarcodeDetailTempList, invBarcodeDetail);
+                    invBarcodeDetailTempList = invBarCodeService.getUpdateBarCodeDetailTemp(invBarcodeDetailTempList, invBarcodeDetail,chkOverWrite.Checked);
                     dgvItemDetails.DataSource = invBarcodeDetailTempList;
                     dgvItemDetails.Refresh();
                     txtTotQty.Text = Common.ConvertDecimalToStringQty(invBarcodeDetailTempList.GetSummaryAmount(x => x.Qty));
@@ -406,6 +406,8 @@ namespace ERP.UI.Windows
                     else
                     {
                         selectedRowIndex = dgvItemDetails.CurrentCell.RowIndex;
+                        loadProductDetails(dgvItemDetails["ProductCode", dgvItemDetails.CurrentCell.RowIndex].Value.ToString().Trim(), dgvItemDetails["Unit", dgvItemDetails.CurrentCell.RowIndex].Value.ToString(), dgvItemDetails["BatchNo", dgvItemDetails.CurrentCell.RowIndex].Value.ToString());
+
                         txtQty.Enabled = true;
                         this.ActiveControl = txtQty;
                         txtQty.Focus();
@@ -415,6 +417,54 @@ namespace ERP.UI.Windows
             catch (Exception ex)
             {
                 Logger.WriteLog(ex, MethodBase.GetCurrentMethod().Name, this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
+            }
+        }
+
+        private void loadProductDetails(string strProduct, string unitofMeasure, string batchNo)
+        {
+            try
+            {
+                if (strProduct.Equals(string.Empty))
+                { return; }
+
+
+                InvBarCodeService invBarCodeService = new InvBarCodeService();
+                if (invBarcodeDetailTempList == null)
+                { invBarcodeDetailTempList = new List<InvBarcodeDetailTemp>(); }
+
+                txtBatchNo.Text = string.Empty;
+                txtBatchNo.Enabled = false;
+
+                existingInvBarcodeDetailTemp = invBarCodeService.getBarCodeDetailTemp(invBarcodeDetailTempList, strProduct, unitofMeasure, batchNo.Trim());
+
+                if (existingInvBarcodeDetailTemp != null)
+                {
+                    txtProductCode.Text = existingInvBarcodeDetailTemp.ProductCode;
+                    txtProductName.Text = existingInvBarcodeDetailTemp.ProductName;
+                    cmbUnit.Text = existingInvBarcodeDetailTemp.UnitOfMeasure;
+                    txtWholesalePrice.Text = Common.ConvertDecimalToStringCurrency(existingInvBarcodeDetailTemp.WholesalePrice);
+                    txtSellingPrice.Text = Common.ConvertDecimalToStringCurrency(existingInvBarcodeDetailTemp.SellingPrice);
+                    txtQty.Text = existingInvBarcodeDetailTemp.Qty.ToString();
+                    dtpExpiry.Value = (DateTime)existingInvBarcodeDetailTemp.ExpiryDate;
+                    dtpManufDate.Value = (DateTime)existingInvBarcodeDetailTemp.ManufDate;
+                    txtBatchNo.Text = existingInvBarcodeDetailTemp.BatchNo;
+                    dtpExpiry.Enabled = false;
+                    dtpManufDate.Enabled = false;
+                    Common.EnableComboBox(false, cmbUnit);
+                    txtQty.Enabled = true;
+                    this.ActiveControl = txtQty;
+                    txtQty.Focus();
+
+                }
+                else
+                {
+                    Toast.Show(this.Text, "Product", strProduct, Toast.messageType.Information, Toast.messageAction.NotExists);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
             }
         }
 
@@ -458,7 +508,23 @@ namespace ERP.UI.Windows
             {
                 this.Cursor = Cursors.WaitCursor;
                 InvBarCodeService invBarcodeService = new InvBarCodeService();
-                string NewDocumentNo = invBarcodeService.GetDocumentNo();
+                List<InvBarcodeDetailTemp> invBarcodeDetailTemps = invBarcodeService.GetDocument(cmbDocNo.Text.Trim());
+                string NewDocumentNo;
+
+                if (invBarcodeDetailTemps.Count>0)
+                {
+                    bool deleteDocument = invBarcodeService.Delete(cmbDocNo.Text.Trim());
+                    if (deleteDocument == false)
+                    {
+                        Toast.Show(this.Text, cmbDocNo.Text.Trim(), "Transaction Error", Toast.messageType.Error, Toast.messageAction.NotExistsForSelected);
+                        return;
+                    }
+                    NewDocumentNo = cmbDocNo.Text.Trim(); 
+                }
+                else
+                {
+                    NewDocumentNo = invBarcodeService.GetDocumentNo();
+                }
 
                 bool saveDocument = invBarcodeService.Save(invBarcodeDetailTempList, NewDocumentNo, this.Name);
 
@@ -482,6 +548,8 @@ namespace ERP.UI.Windows
                     Toast.Show(this.Text, NewDocumentNo, "", Toast.messageType.Error, Toast.messageAction.SaveTransaction);
                     return;
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -973,7 +1041,7 @@ namespace ERP.UI.Windows
 
         private void cmbDocNo_Click(object sender, EventArgs e)
         {
-           
+
 
         }
 
