@@ -174,6 +174,10 @@ namespace ERP.UI.Windows
                     //loadProductDetails(true, txtProductCode.Text.Trim(), 0, dtpExpiry.Value);
                     txtProductName.Focus();
                 }
+                else
+                {
+                    txtProductCode.Focus();
+                }
                 //loadProductDetails(true, txtProductCode.Text.Trim(), 0, dtpExpiry.Value);
             }
             catch (Exception ex)
@@ -188,11 +192,15 @@ namespace ERP.UI.Windows
             {
                 if (e.KeyCode.Equals(Keys.Enter) || e.KeyCode.Equals(Keys.Tab))
                 {
-
-                    if (!txtProductName.Text.Trim().Equals(string.Empty))
+                    if (txtProductName.Text.Trim().Equals(string.Empty))
                     {
-                        cmbUnit.Enabled = true;
-                        cmbUnit.Focus();
+                        txtProductName.Enabled = true;
+                        txtProductName.Focus();
+                        return;
+                    }
+                    else
+                    {
+                        txtProductName_Leave(this, e);
                     }
                 }
             }
@@ -206,14 +214,24 @@ namespace ERP.UI.Windows
         {
             try
             {
-
+                txtProductName.Leave -= txtProductName_Leave;
+                if (!string.IsNullOrEmpty(txtProductCode.Text.Trim()))
+                {
+                    //loadProductDetails(true, txtProductCode.Text.Trim(), 0, dtpExpiry.Value);
+                    cmbUnit.Enabled = true;
+                    cmbUnit.Focus();
+                }
+                else
+                {
+                    txtProductName.Focus();
+                }
+                //loadProductDetails(true, txtProductCode.Text.Trim(), 0, dtpExpiry.Value);
             }
             catch (Exception ex)
             {
                 Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
             }
         }
-
 
         private void UpdateGrid()
         {
@@ -247,7 +265,7 @@ namespace ERP.UI.Windows
                     InvBarCodeService invBarCodeService = new InvBarCodeService();
 
                     dgvItemDetails.DataSource = null;
-                    invBarcodeDetailTempList = invBarCodeService.getUpdateBarCodeDetailTemp(invBarcodeDetailTempList, invBarcodeDetail,chkOverWrite.Checked);
+                    invBarcodeDetailTempList = invBarCodeService.getUpdateBarCodeDetailTemp(invBarcodeDetailTempList, invBarcodeDetail, chkOverWrite.Checked);
                     dgvItemDetails.DataSource = invBarcodeDetailTempList;
                     dgvItemDetails.Refresh();
                     txtTotQty.Text = Common.ConvertDecimalToStringQty(invBarcodeDetailTempList.GetSummaryAmount(x => x.Qty));
@@ -511,7 +529,7 @@ namespace ERP.UI.Windows
                 List<InvBarcodeDetailTemp> invBarcodeDetailTemps = invBarcodeService.GetDocument(cmbDocNo.Text.Trim());
                 string NewDocumentNo;
 
-                if (invBarcodeDetailTemps !=null)
+                if (invBarcodeDetailTemps != null)
                 {
                     bool deleteDocument = invBarcodeService.Delete(cmbDocNo.Text.Trim());
                     if (deleteDocument == false)
@@ -519,7 +537,7 @@ namespace ERP.UI.Windows
                         Toast.Show(this.Text, cmbDocNo.Text.Trim(), "Transaction Error", Toast.messageType.Error, Toast.messageAction.NotExistsForSelected);
                         return;
                     }
-                    NewDocumentNo = cmbDocNo.Text.Trim(); 
+                    NewDocumentNo = cmbDocNo.Text.Trim();
                 }
                 else
                 {
@@ -980,7 +998,7 @@ namespace ERP.UI.Windows
                 if (e.KeyCode.Equals(Keys.Enter))
                 {
                     txtQty.Enabled = true;
-                    txtQty.Text = "1";
+                    txtQty.Text = "1.00";
                     txtQty.Focus();
                 }
             }
@@ -1027,10 +1045,18 @@ namespace ERP.UI.Windows
         {
             try
             {
-                if (e.KeyCode.Equals(Keys.Enter))
+                if (e.KeyCode.Equals(Keys.Enter) || e.KeyCode.Equals(Keys.Tab))
                 {
-                    if (e.KeyCode.Equals(Keys.Enter) || e.KeyCode.Equals(Keys.Tab))
-                    { UpdateGrid(); }
+                    if (txtWholesalePrice.Text.Trim().Equals(string.Empty))
+                    {
+                        txtWholesalePrice.Enabled = true;
+                        txtWholesalePrice.Focus();
+                        return;
+                    }
+                    else
+                    {
+                        txtWholesalePrice_Leave(this, e);
+                    }
                 }
             }
             catch (Exception ex)
@@ -1067,5 +1093,29 @@ namespace ERP.UI.Windows
             }
 
         }
+
+        private void txtWholesalePrice_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                txtWholesalePrice.Leave -= txtWholesalePrice_Leave;
+                if (!string.IsNullOrEmpty(txtWholesalePrice.Text.Trim()))
+                {
+                    UpdateGrid();
+                }
+                else
+                {
+                    txtProductCode.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex, MethodInfo.GetCurrentMethod().Name.ToString(), this.Name, Logger.logtype.ErrorLog, Common.LoggedLocationID);
+            }
+        }
+
+
+
+
     }
 }
