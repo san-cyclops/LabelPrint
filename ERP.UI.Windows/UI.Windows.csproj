@@ -450,6 +450,11 @@
     <Content Include="gol1_djY_icon.ico" />
     <Content Include="gol1_fI3_icon.ico" />
     <Content Include="gol1_ugk_icon.ico" />
+    <None Include="Resources\236918712_10227010170738917_1819780490112175130_n.jpg" />
+    <None Include="Resources\1download.jpg" />
+    <None Include="Resources\hj1.jpg" />
+    <None Include="Resources\kd.jpg" />
+    <None Include="Resources\pp.jpg" />
     <Content Include="Resources\pre-loader.gif" />
     <None Include="Resources\Room.jpg" />
     <None Include="Resources\Room1.jpg" />

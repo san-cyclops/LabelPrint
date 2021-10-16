@@ -73,9 +73,39 @@ namespace ERP.UI.Windows.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1download {
+            get {
+                object obj = ResourceManager.GetObject("1download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1download1 {
+            get {
+                object obj = ResourceManager.GetObject("1download1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _1Password_icon {
             get {
                 object obj = ResourceManager.GetObject("1Password-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _236918712_10227010170738917_1819780490112175130_n {
+            get {
+                object obj = ResourceManager.GetObject("236918712_10227010170738917_1819780490112175130_n", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -863,6 +893,16 @@ namespace ERP.UI.Windows.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hj1 {
+            get {
+                object obj = ResourceManager.GetObject("hj1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Home_icon {
             get {
                 object obj = ResourceManager.GetObject("Home-icon", resourceCulture);
@@ -916,6 +956,16 @@ namespace ERP.UI.Windows.Properties {
         internal static System.Drawing.Bitmap invoice_document_bill {
             get {
                 object obj = ResourceManager.GetObject("invoice_document_bill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kd {
+            get {
+                object obj = ResourceManager.GetObject("kd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1466,6 +1516,26 @@ namespace ERP.UI.Windows.Properties {
         internal static System.Drawing.Bitmap PostIcon1 {
             get {
                 object obj = ResourceManager.GetObject("PostIcon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pp {
+            get {
+                object obj = ResourceManager.GetObject("pp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pp1 {
+            get {
+                object obj = ResourceManager.GetObject("pp1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

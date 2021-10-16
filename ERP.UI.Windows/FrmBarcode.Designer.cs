@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItemDetails = new System.Windows.Forms.DataGridView();
             this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +70,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtTotQty = new System.Windows.Forms.TextBox();
             this.lblNetAmount = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.grpButtonSet2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -79,14 +78,13 @@
             this.grpBody.SuspendLayout();
             this.grpLeftFooter.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // grpButtonSet2
             // 
             this.grpButtonSet2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grpButtonSet2.Location = new System.Drawing.Point(897, 562);
+            this.grpButtonSet2.Location = new System.Drawing.Point(897, 683);
             this.grpButtonSet2.Margin = new System.Windows.Forms.Padding(4);
             this.grpButtonSet2.Size = new System.Drawing.Size(399, 56);
             // 
@@ -176,9 +174,9 @@
             // ManufDate
             // 
             this.ManufDate.DataPropertyName = "ManufDate";
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.ManufDate.DefaultCellStyle = dataGridViewCellStyle6;
             this.ManufDate.HeaderText = "Manuf Date";
             this.ManufDate.Name = "ManufDate";
             this.ManufDate.Width = 110;
@@ -186,9 +184,9 @@
             // Expiry
             // 
             this.Expiry.DataPropertyName = "ExpiryDate";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.Expiry.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Format = "d";
+            dataGridViewCellStyle7.NullValue = null;
+            this.Expiry.DefaultCellStyle = dataGridViewCellStyle7;
             this.Expiry.HeaderText = "Expiry Date";
             this.Expiry.Name = "Expiry";
             this.Expiry.Width = 110;
@@ -205,8 +203,8 @@
             // Qty
             // 
             this.Qty.DataPropertyName = "Qty";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Qty.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle8;
             this.Qty.HeaderText = "Qty";
             this.Qty.Name = "Qty";
             this.Qty.ReadOnly = true;
@@ -215,8 +213,8 @@
             // SellingPrice
             // 
             this.SellingPrice.DataPropertyName = "SellingPrice";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SellingPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.SellingPrice.HeaderText = "Selling Price";
             this.SellingPrice.Name = "SellingPrice";
             this.SellingPrice.ReadOnly = true;
@@ -224,8 +222,8 @@
             // WholesalePrice
             // 
             this.WholesalePrice.DataPropertyName = "WholesalePrice";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.WholesalePrice.DefaultCellStyle = dataGridViewCellStyle10;
             this.WholesalePrice.HeaderText = "Wholesale Price";
             this.WholesalePrice.Name = "WholesalePrice";
             this.WholesalePrice.ReadOnly = true;
@@ -340,7 +338,7 @@
             this.grpHeader.Controls.Add(this.dtpReferenceDocumentDate);
             this.grpHeader.Controls.Add(this.txtReferenceDocumentNo);
             this.grpHeader.Controls.Add(this.lblPDocumentNo);
-            this.grpHeader.Location = new System.Drawing.Point(3, 78);
+            this.grpHeader.Location = new System.Drawing.Point(3, 185);
             this.grpHeader.Margin = new System.Windows.Forms.Padding(4);
             this.grpHeader.Name = "grpHeader";
             this.grpHeader.Size = new System.Drawing.Size(1293, 65);
@@ -469,7 +467,7 @@
             this.grpBody.Controls.Add(this.txtProductCode);
             this.grpBody.Controls.Add(this.txtProductName);
             this.grpBody.Controls.Add(this.txtBatchNo);
-            this.grpBody.Location = new System.Drawing.Point(3, 148);
+            this.grpBody.Location = new System.Drawing.Point(3, 255);
             this.grpBody.Margin = new System.Windows.Forms.Padding(4);
             this.grpBody.Name = "grpBody";
             this.grpBody.Size = new System.Drawing.Size(1293, 353);
@@ -491,7 +489,7 @@
             this.grpLeftFooter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.grpLeftFooter.Controls.Add(this.lblTag);
             this.grpLeftFooter.Controls.Add(this.cmbTag);
-            this.grpLeftFooter.Location = new System.Drawing.Point(3, 508);
+            this.grpLeftFooter.Location = new System.Drawing.Point(3, 615);
             this.grpLeftFooter.Margin = new System.Windows.Forms.Padding(4);
             this.grpLeftFooter.Name = "grpLeftFooter";
             this.grpLeftFooter.Size = new System.Drawing.Size(640, 50);
@@ -502,7 +500,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.txtTotQty);
             this.panel1.Controls.Add(this.lblNetAmount);
-            this.panel1.Location = new System.Drawing.Point(651, 508);
+            this.panel1.Location = new System.Drawing.Point(651, 615);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(645, 50);
@@ -533,24 +531,13 @@
             this.lblNetAmount.TabIndex = 77;
             this.lblNetAmount.Text = "Total Qty";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::ERP.UI.Windows.Properties.Resources.abcccccaaa_removebg_preview;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(112, 63);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 156;
-            this.pictureBox1.TabStop = false;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Image = global::ERP.UI.Windows.Properties.Resources.Screenshot_9_removebg_preview;
-            this.pictureBox2.Location = new System.Drawing.Point(115, 9);
+            this.pictureBox2.Image = global::ERP.UI.Windows.Properties.Resources.pp1;
+            this.pictureBox2.Location = new System.Drawing.Point(-6, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(253, 63);
+            this.pictureBox2.Size = new System.Drawing.Size(1302, 176);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 157;
             this.pictureBox2.TabStop = false;
@@ -560,9 +547,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(1300, 620);
+            this.ClientSize = new System.Drawing.Size(1300, 741);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.grpLeftFooter);
             this.Controls.Add(this.grpBody);
@@ -577,7 +563,6 @@
             this.Controls.SetChildIndex(this.grpBody, 0);
             this.Controls.SetChildIndex(this.grpLeftFooter, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.pictureBox2, 0);
             this.grpButtonSet2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -590,7 +575,6 @@
             this.grpLeftFooter.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
@@ -616,7 +600,6 @@
         private System.Windows.Forms.DateTimePicker dtpManufDate;
         private System.Windows.Forms.TextBox txtTotQty;
         private System.Windows.Forms.Label lblNetAmount;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private CustomControls.TextBoxQty txtSellingPrice;
         private CustomControls.TextBoxQty txtWholesalePrice;

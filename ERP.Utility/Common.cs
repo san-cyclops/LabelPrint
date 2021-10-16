@@ -713,7 +713,7 @@ namespace ERP.Utility
             {
                 if (Value == null)
                     Value = "0";
-                return Math.Round((Value.Trim() != string.Empty ? Convert.ToDecimal(Value) : 0), decimalPointsQty);
+                return Math.Round((Value.Trim() != string.Empty ? Convert.ToDecimal(String.Format("{0:0.00}", (Convert.ToDecimal(Value)))) : 0), decimalPointsQty);
 
 
             }
